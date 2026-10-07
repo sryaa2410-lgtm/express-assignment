@@ -24,7 +24,7 @@ app.listen(PORT, () => {
 
 app.get("/api/books", (request, response)=>{
   response.status(200).send(mockBooks);
-})
+});
 
 //query params: get request to get records of books by genre
 
@@ -34,4 +34,21 @@ app.get("/api/books/:genre", (request, response) => {
   response.status(200).send(filterBooks);
 
 }
-)
+);
+
+// to filter in ascending order of year of publication
+
+app.get("/api/get/books", (request, response) => {
+  const {genre, sort} = request.query;
+  let filterBooks = [...mockBooks];
+  if(genre){
+    filterBooks = filterBooks.filter((book) => book.genre === genre);  
+  }
+  if(sort === "asc"){
+    filterBooks.sort((a,b) => a.year - b.year);
+  }
+  if(sort ==="desc"){
+    filterBooks.sort((a,b) => b.year - a.year);
+  }
+  response.status(200).send(filterBooks)
+});

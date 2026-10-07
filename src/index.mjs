@@ -19,3 +19,9 @@ const mockBooks = [
 app.listen(PORT, () => {
   console.log(`Running on port ${PORT}`);
 });
+
+//assignment 1: get request to get records of all books
+
+app.get("/api/books", (request, response)=>{
+  response.status(200).send(mockBooks);
+})

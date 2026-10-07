@@ -25,3 +25,13 @@ app.listen(PORT, () => {
 app.get("/api/books", (request, response)=>{
   response.status(200).send(mockBooks);
 })
+
+//query params: get request to get records of books by genre
+
+app.get("/api/books/:genre", (request, response) => {
+  const {genre} = request.params;
+  const filterBooks = mockBooks.filter((book) => book.genre === genre);
+  response.status(200).send(filterBooks);
+
+}
+)
